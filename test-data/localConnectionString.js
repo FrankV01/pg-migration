@@ -6,5 +6,5 @@
  * @type {string} the connection string on localhost
  */
 
-// We'll use the later as a bad assumption
+// We'll use the latter as a bad assumption
 module.exports = process.env.DATABASE_URL || 'postgresql://localhost:5432/pg_migration';
