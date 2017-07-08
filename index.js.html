@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>pg-migration API</title>
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    <!--<link type="text/css" rel="stylesheet" href="style.css">-->
+    <meta name="derived-from" content="https://github.com/vitaly-t/pg-promise" />
+</head>
+
+<body>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-dbConnection.html">dbConnection</a></li><li><a href="module-dbInfo.html">dbInfo</a></li><li><a href="module-dbMigrate.html">dbMigrate</a></li></ul><h3>Classes</h3><ul><li><a href="dbVersion.html">dbVersion</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$main">$main</a></li></ul>
+    <div class="home-link">
+        <a href="https://github.com/FrankV01/pg-migration">&lt;&lt; GitHub</a>
+    </div>
+</nav>
+
+<div id="main">
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const $npm = {
+  dbMigrate: require('./dbMigrate'),
+  debug: require('debug')('pg-migration:index'),
+  promise: require('bluebird'),
+  dbConnection: require('./dbConnection')
+};
+
+/**
+ * Entry point.
+ *
+ * @author Frank Villasenor
+ * @param {object} opts object with {connection: [see url], migrations: [see readme]
+ * @returns {promise} A promise which resolves when we're done.
+ */
+function $main(opts) {
+  $npm.debug('run');
+
+  if(!(opts.connection || process.env.DATABASE_URL)) {
+    throw new Error('connection or connection string not provided');
+  }
+  if( !opts.migrations ) {
+    throw new Error('Migrations not provided.');
+  }
+
+  const IsDatabaseInstance = function(obj) {
+    return !!obj.tx &amp;&amp; !!obj.$config;
+  };
+
+  //document available options and default them.
+  var options = {
+    //establish the connection; if existing instance use that otherwise create one
+    connection: (IsDatabaseInstance(opts.connection)) ? opts.connection : ($npm.dbConnection(opts.connection || process.env.DATABASE_URL)),
+    migrations: opts.migrations
+  };
+
+  return $npm
+    .dbMigrate(options.connection, options.migrations);
+}
+
+module.exports = $main;</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

@@ -1,4 +1,34 @@
-/** @module dbMigrate */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>pg-migration API</title>
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+    <!--<link type="text/css" rel="stylesheet" href="style.css">-->
+    <meta name="derived-from" content="https://github.com/vitaly-t/pg-promise" />
+</head>
+
+<body>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-dbConnection.html">dbConnection</a></li><li><a href="module-dbInfo.html">dbInfo</a></li><li><a href="module-dbMigrate.html">dbMigrate</a></li></ul><h3>Classes</h3><ul><li><a href="dbVersion.html">dbVersion</a></li></ul><h3>Global</h3><ul><li><a href="global.html#$main">$main</a></li></ul>
+    <div class="home-link">
+        <a href="https://github.com/FrankV01/pg-migration">&lt;&lt; GitHub</a>
+    </div>
+</nav>
+
+<div id="main">
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/** @module dbMigrate */
 
 /**
  * Migration module. Used internally to perform the principle database migrations.
@@ -87,7 +117,7 @@ module.exports = function (dbConnection, migrations) {
         $npm.debug('[then] mapSeries is done', out);
         var result = {overallResult:true};
         out.forEach(function(val, idx) {
-          result.overallResult = result.overallResult && val.result;
+          result.overallResult = result.overallResult &amp;&amp; val.result;
           result[ versions[idx] ] = val;
         });
         return result;
@@ -96,4 +126,21 @@ module.exports = function (dbConnection, migrations) {
         throw er;
       });
     });
-};
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer>
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
