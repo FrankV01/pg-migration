@@ -1,16 +1,24 @@
-# pg-migration
+# pg-migration-promise
 A [Node.js](https://nodejs.org/en/) package to help with database migrations -- that is, changes to your
 database over time.
+
+It has a Promises based interface and development focused on performance and quality.
 
 The high level idea is to bring your projects' database up to the latest version
 in an automatic, consistent manor across many environments (development, 
 staging and **production**).
 
 ## Status
-This project is ready for consumption. For now, you can include it in your project
-via npm's git integration. More information here: https://docs.npmjs.com/files/package.json#github-urls
+This project is ready for consumption. There are two options to include it in your project. 
+Please know that this is still under development and it's best if you frequently check 
+npm for updates
 
-I'll be deploying a npm package once I feel no further refinements are needed.
+### NPM (preferred)
+The [current official release](https://www.npmjs.com/package/pg-migration-promise) 
+is available in NPM. You can install it with `npm install --save pg-migration-promise`.
+
+#### npm's git integration. 
+More information here: https://docs.npmjs.com/files/package.json#github-urls
 
 ## Examples
 A basic example is provided below. This product is intended to aid keeping several 
@@ -23,7 +31,7 @@ The full API Documentation can be found at [https://frankv01.github.io/pg-migrat
 
 A quick summary is follows.
 
-### Migration Object
+### Migration Definition File
 The migration object is a JSON element that contains your SQL to create and modify the 
 definition of the database.  Basic structure is this: 
 
@@ -43,7 +51,9 @@ definition of the database.  Basic structure is this:
 ```
 
 With node, you can define a `.json` file and `require` it to a variable or directly 
-in the object's construction.
+in the object's construction. The migration definition file can also be `.js` which 
+allows you to define logic in your migrations. The only requirement is that the json 
+structure is adhered to.
 
 ### App Initialization
 After the migration object is setup, preferably in a different module, you execute 
@@ -57,8 +67,8 @@ errors which can result from bad SQL or, lets face it, a package bug.
 const pg_migration = require('pg-migration');
 const d = pg_migration({
   connection: 'postgres://john:123@localhost:5432/products', //or an object 
-  migrations: require('migrations.json')
-});
+  migrations: require('migrations.json') //or a .js file
+}); //returns a promise
 d.catch(function(er) {
   console.log('pg-migration: Error occurred during pg-migration', er);
 });
@@ -76,23 +86,24 @@ take queues from [Nightwatch](https://github.com/nightwatchjs/nightwatch)
 and [pg-promise](https://github.com/vitaly-t/pg-promise) and am -- at a 
 high level -- following those ideas amongst my own.
 
-### Setup
-The following is instructions to set up this project on your workstations
+### Development Setup
+The following are the instructions to set this project up on your workstations
 for hacking/exploration or for contributions. The intention is to get the
-dependencies installed so that you can run the unit tests. **Unit tests are good**
+dependencies installed so that you can run the unit tests. 
+**Unit tests are good!**
 
 #### Dependencies
 
 There are few dependencies that you must manually install.
 [Node.js](https://nodejs.org/en/) and [postgres](https://www.postgresql.org/).
 
-Please install these via your method of choice.
+Please install these via your method of choice. My suggestions follow
 - Node
   - Windows: Use installer from the web site
   - Mac OS X: Use the installer or the Linux method
   - Linux: I'd suggest using [nvm](https://github.com/creationix/nvm#install-script)
 - Postgres
-  - Windows: ??
+  - Windows: Installer
   - Mac OS X: [Postgres.app](https://postgresapp.com/)
   - Linux: ??
 
