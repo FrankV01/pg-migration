@@ -18,6 +18,11 @@ developers database instances up to date no matter which version is pulled from
 source control. Do note, however, that this product doesn't 
 support going backwards -- only forwards.
 
+## API Documentation
+The full API Documentation can be found at [https://frankv01.github.io/pg-migration/](https://frankv01.github.io/pg-migration/)
+
+A quick summary is follows.
+
 ### Migration Object
 The migration object is a JSON element that contains your SQL to create and modify the 
 definition of the database.  Basic structure is this: 
