@@ -45,8 +45,20 @@
 
 
     <section>
-        <article><h1>pg-migration</h1><p>Further information forthcoming.</p>
-<h3>Entry Point</h3><p>[planning] Document entry point</p></article>
+        <article><h1>pg-migration</h1><p>This is the API documentation for pg-migration which 
+itself is a <a href="https://www.postgresql.org/">PostgresSQL</a> 
+migration tool. </p>
+<p>A migration tool allows you define forward (and sometimes)
+backwards paths for database upgrades and downgrades thereby
+allowing team members (and production) to &quot;migrate&quot; forward
+version to version as changes are defined for the database.</p>
+<p>My expectation for this process is that it's automatic and 
+&quot;<em>built in</em>&quot; to the app. When the app is started, the database 
+is migrated forward to the latest database version including any
+seed or configuration data.</p>
+<h3>Entry Point</h3><p>The entry point to the library is <code>require('pg-migration')</code>. You can
+view the relevant API documentation 
+<a href="https://frankv01.github.io/pg-migration/global.html#$main">$main</a> </p></article>
     </section>
 
 
