@@ -17,7 +17,8 @@ describe('dbMigrate', function () {
     const resetPromises = [
       dbConnection.none('drop table if exists example;'),
       dbConnection.none("UPDATE pg_migration_dbinfo set value = '0.0.0' WHERE key = 'db_version';"),
-      dbConnection.none('drop table if exists secondtable;')
+      dbConnection.none('drop table if exists secondtable;'),
+      dbConnection.none('drop table if exists large_dataset;')
     ];
     return $npm.promise.all(resetPromises);
   };
@@ -25,7 +26,7 @@ describe('dbMigrate', function () {
   beforeEach(function() {
     $npm.sinon.spy(dbConnection, 'tx');
     assert.equal(dbConnection.tx.callCount, 0);
-
+    
     return resetDb()
       .catch(function(er){
         console.log('afterEach:catch', er);
@@ -100,5 +101,15 @@ describe('dbMigrate', function () {
               });
           })
       });
+  });
+  
+  it('Migrates with large datasets', function() {
+    this.timeout(10000); //Long as this test takes a while.
+    const lgDataset = require('../test-data/large-dataset');
+    const migrationPromise = dbMigrate(dbConnection, lgDataset);
+    return migrationPromise.then((res) => {
+      $npm.debug(res);
+      assert.equal(res.overallResult, true);
+    });
   });
 });
