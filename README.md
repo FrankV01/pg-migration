@@ -64,7 +64,7 @@ pg-migration returns a [promise](http://bluebirdjs.com/docs/api-reference.html) 
 errors which can result from bad SQL or, lets face it, a package bug.
 
 ```javascript
-const pg_migration = require('pg-migration');
+const pg_migration = require('pg-migration-promise');
 const d = pg_migration({
   connection: 'postgres://john:123@localhost:5432/products', //or an object 
   migrations: require('migrations.json') //or a .js file
