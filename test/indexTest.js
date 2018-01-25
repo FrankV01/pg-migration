@@ -18,7 +18,7 @@ describe('index', function () {
     assert.throws(pg_migration);
   });
 
-  it('missing migration argument', function() {
+  it('is missing migration argument', function() {
     const opt = {
       connection: 'fake connection string'
     };
