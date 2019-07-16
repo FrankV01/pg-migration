@@ -82,7 +82,7 @@ project.
 
 I am open to suggestions as well; Node is not my "day time forte" but
 has quickly become a technology of interest. That said, I'm trying to
-take queues from [Nightwatch](https://github.com/nightwatchjs/nightwatch)
+take cues from [Nightwatch](https://github.com/nightwatchjs/nightwatch)
 and [pg-promise](https://github.com/vitaly-t/pg-promise) and am -- at a
 high level -- following those ideas amongst my own.
 
