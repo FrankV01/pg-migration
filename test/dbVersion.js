@@ -83,4 +83,42 @@ describe('dbVersion', function () {
     assert.equal(v1.amNewer(v2), true);
     assert.equal(v2.amNewer(v1), false);
   });
+
+  it('amNewer understands hierarcy', function() {
+    // major > minor
+    var v1 = new dbVersion('3.2.1.0');
+    var v2 = new dbVersion('2.3.1.0');
+    assert.equal(v1.amNewer(v2), true);
+    assert.equal(v2.amNewer(v1), false);
+
+    // major > revision
+    v1 = new dbVersion('3.2.1.0');
+    v2 = new dbVersion('2.2.2.0');
+    assert.equal(v1.amNewer(v2), true);
+    assert.equal(v2.amNewer(v1), false);
+
+    // major > build
+    v1 = new dbVersion('3.2.1.0');
+    v2 = new dbVersion('2.2.1.1');
+    assert.equal(v1.amNewer(v2), true);
+    assert.equal(v2.amNewer(v1), false);
+
+    // minor > revision
+    v1 = new dbVersion('3.2.1.0');
+    v2 = new dbVersion('3.1.2.0');
+    assert.equal(v1.amNewer(v2), true);
+    assert.equal(v2.amNewer(v1), false);
+
+    // minor > revision
+    v1 = new dbVersion('3.2.1.0');
+    v2 = new dbVersion('3.1.1.1');
+    assert.equal(v1.amNewer(v2), true);
+    assert.equal(v2.amNewer(v1), false);
+
+    // revision > build
+    v1 = new dbVersion('3.2.2.0');
+    v2 = new dbVersion('3.2.1.1');
+    assert.equal(v1.amNewer(v2), true);
+    assert.equal(v2.amNewer(v1), false);
+  });
 });
